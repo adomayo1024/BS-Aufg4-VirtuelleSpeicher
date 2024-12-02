@@ -2,9 +2,10 @@ package de.hawhh.osbsp;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Random;
 
 /**
- * Eine Seitentabelle eines Prozesses, implementiert als ArrayList von
+ * Eine Seitentabelle eines Prozesses. Implementiert als ArrayList von
  * PageTableEntry-Elementen (pte)
  *
  */
@@ -124,24 +125,48 @@ public class PageTable {
      * die ausgewählte Seite durch die neue Seite (newPte) am selben Listenplatz
      * ersetzen
      */
-    private PageTableEntry clockAlgorithm(PageTableEntry newPte) {
-        throw new RuntimeException("Nicht implementiert");
+    private PageTableEntry clockAlgorithm(PageTableEntry newPte)
+    {
+        int beginIndex = pteRAMlistIndex;
+        boolean find = false;
+        PageTableEntry currEntry = null;
+
+        do
+        {
+            incrementPteRAMlistIndex();
+            currEntry = pteRAMlist.get(pteRAMlistIndex);
+            if(currEntry.referenced)
+            {
+                currEntry.referenced = false;
+            }
+            else
+            {
+                find = true;
+                pteRAMlist.set(pteRAMlistIndex, newPte);
+
+            }
+        }while(pteRAMlistIndex != beginIndex && !find);
+
+        return currEntry;
     }
 
     /**
      * RANDOM-Algorithmus: Zufällige Auswahl
      */
-    private PageTableEntry randomAlgorithm(PageTableEntry newPte) {
+    private PageTableEntry randomAlgorithm(PageTableEntry newPte)
+    {
         // ToDo
-        throw new RuntimeException("Nicht implementiert");
-        //return pte;
+        PageTableEntry oldPte = pteRAMlist.remove(new Random().nextInt(0, pteRAMlist.size()));
+        pteRAMlist.add(newPte);
+        return oldPte;
     }
 
     // ----------------------- Hilfsmethode --------------------------------
     /**
      * ramPteIndex zirkular hochzählen zwischen 0 .. Listengröße-1
      */
-    private void incrementPteRAMlistIndex() {
+    private void incrementPteRAMlistIndex()
+    {
         pteRAMlistIndex = (pteRAMlistIndex + 1) % pteRAMlist.size();
     }
 

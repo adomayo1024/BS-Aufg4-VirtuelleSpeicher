@@ -1,0 +1,16 @@
+a)
+
+ Bei dem Random und FIFO Algorithmus ist es plausibel, weil bei jeder Operation die Chance sehr groß ist das eine andere
+ Seite gebraucht wird, und es können nur 10 Seiten maximal eines Prozesses im Hauptspeicher liegen von 4096 möglichen Seiten
+ die ein Prozess haben kann. Bei dem Clock Algortihmus ist der Wert unsere Ansicht nach nicht so plausibel, der müsste eigentlich
+ auch höher sein, weil der Algorithmus welche Seite verdrängt wird doch nicht so relevant ist, weil die Chance das bei der
+ nächsten Operationen irgeneine andere "random" Seite gebraucht wird sehr hoch ist.
+
+ b)
+
+
+ c)
+
+ Man kann sich mehr RAM anschaffen, damit allgemein mehr RAM zu verfügung steht und damit auch der große Prozess mehr
+ RAM benutzte kann.
+ Oder einstellen das dieses Programm einen größeren Anspruch auf RAM hat. (Weiß nicht ob das möglich ist)

@@ -145,7 +145,10 @@ public class PageTable {
                 pteRAMlist.set(pteRAMlistIndex, newPte);
 
             }
-        }while(pteRAMlistIndex != beginIndex && !find);
+        }while(!find);
+
+        os.testOut("Prozess " + pid + ": Clock-Algorithmus hat pte ausgewählt: "
+                + currEntry.virtPageNum);
 
         return currEntry;
     }
